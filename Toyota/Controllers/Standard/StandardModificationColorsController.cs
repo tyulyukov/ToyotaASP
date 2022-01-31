@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,8 @@ namespace Toyota.Controllers.Standard
 {
     public class StandardModificationColorsController : Controller
     {
+        public const String ModificationColorsDirectoryName = "modification_colors_thumbs";
+
         private readonly ApplicationDbContext _context;
 
         public StandardModificationColorsController(ApplicationDbContext context)
@@ -49,8 +52,8 @@ namespace Toyota.Controllers.Standard
         // GET: StandardModificationColors/Create
         public IActionResult Create()
         {
-            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Id");
-            ViewData["ModificationId"] = new SelectList(_context.Modifications, "Id", "Id");
+            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Name");
+            ViewData["ModificationId"] = new SelectList(_context.Modifications, "Id", "Name");
             return View();
         }
 
@@ -59,17 +62,22 @@ namespace Toyota.Controllers.Standard
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Slug,ModificationId,ColorId,ImgUrl")] ModificationColors modificationColors)
+        public async Task<IActionResult> Create([Bind("Id,Slug,ModificationId,ColorId")] ModificationColors modificationColors, IFormFile file)
         {
             if (ModelState.IsValid)
             {
                 modificationColors.Id = Guid.NewGuid();
+                modificationColors.ImgUrl = await Helpers.Media.UploadImage(file, ModificationColorsDirectoryName);
+
                 _context.Add(modificationColors);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Id", modificationColors.ColorId);
-            ViewData["ModificationId"] = new SelectList(_context.Modifications, "Id", "Id", modificationColors.ModificationId);
+
+            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Name", modificationColors.ColorId);
+            ViewData["ModificationId"] = new SelectList(_context.Modifications, "Id", "Name", modificationColors.ModificationId);
+
             return View(modificationColors);
         }
 
@@ -86,8 +94,8 @@ namespace Toyota.Controllers.Standard
             {
                 return NotFound();
             }
-            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Id", modificationColors.ColorId);
-            ViewData["ModificationId"] = new SelectList(_context.Modifications, "Id", "Id", modificationColors.ModificationId);
+            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Name", modificationColors.ColorId);
+            ViewData["ModificationId"] = new SelectList(_context.Modifications, "Id", "Name", modificationColors.ModificationId);
             return View(modificationColors);
         }
 
@@ -123,8 +131,8 @@ namespace Toyota.Controllers.Standard
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Id", modificationColors.ColorId);
-            ViewData["ModificationId"] = new SelectList(_context.Modifications, "Id", "Id", modificationColors.ModificationId);
+            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Name", modificationColors.ColorId);
+            ViewData["ModificationId"] = new SelectList(_context.Modifications, "Id", "Name", modificationColors.ModificationId);
             return View(modificationColors);
         }
 

@@ -51,7 +51,7 @@ namespace Toyota.Controllers.Standard
         // GET: StandardModifications/Create
         public IActionResult Create()
         {
-            ViewData["ModelId"] = new SelectList(_context.Models, "Id", "Id");
+            ViewData["ModelId"] = new SelectList(_context.Models, "Id", "Name");
             return View();
         }
 
@@ -73,7 +73,7 @@ namespace Toyota.Controllers.Standard
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["ModelId"] = new SelectList(_context.Models, "Id", "Id", modification.ModelId);
+            ViewData["ModelId"] = new SelectList(_context.Models, "Id", "Name", modification.ModelId);
 
             return View(modification);
         }
@@ -91,7 +91,7 @@ namespace Toyota.Controllers.Standard
             {
                 return NotFound();
             }
-            ViewData["ModelId"] = new SelectList(_context.Models, "Id", "Id", modification.ModelId);
+            ViewData["ModelId"] = new SelectList(_context.Models, "Id", "Name", modification.ModelId);
             return View(modification);
         }
 
@@ -127,7 +127,7 @@ namespace Toyota.Controllers.Standard
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ModelId"] = new SelectList(_context.Models, "Id", "Id", modification.ModelId);
+            ViewData["ModelId"] = new SelectList(_context.Models, "Id", "Name", modification.ModelId);
             return View(modification);
         }
 

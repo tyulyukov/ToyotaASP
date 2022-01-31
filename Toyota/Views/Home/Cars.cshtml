@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Cars Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Cars</h1>
+</div>
+
+<div id="navModels">
+    Тут будут ссылки на названия моделей
+</div>
+
+<div id="mainModels">
+    Тут будет активная модель
+</div>
+
+@section Scripts {
+    <script>
+        let apiModels = "/api/ApiModels";
+        let debugMode = false;
+
+        function renderModel(htmlTag) {
+            console.log(htmlTag);
+            fetch(apiModels + "/" + htmlTag.id)
+                .then(res => {
+                    if (res.status !== 200) {
+                        console.error(res);
+                        return;
+                    }
+
+                    if (debugMode)
+                        console.log(res);
+
+                    return res.json();
+                })
+                .then(model => {
+                    if (debugMode)
+                        console.log(model);
+
+                    let mainModels = document.getElementById("mainModels");
+                    let div = document.createElement("div");
+
+                    let h3 = document.createElement("h3");
+                    h3.innerText = model.name;
+
+                    let img = document.createElement("img");
+                    img.src = model.imgUrl;
+
+                    div.appendChild(h3);
+                    div.appendChild(img);
+
+                    mainModels.innerHTML = "";
+                    mainModels.appendChild(div);
+                })
+                .catch(err => { console.error(err); });
+        }
+
+        function renderModelsNav(models) {
+            if (debugMode)
+                console.log(models);
+
+            let div = document.getElementById("navModels");
+            div.innerHTML = "";
+            let ul = document.createElement("ul");
+
+            models.map(model => {
+                if (debugMode)
+                    console.log(model);
+
+                let li = document.createElement("li");
+                li.innerText = model.name;
+                li.id = model.id;
+                li.onclick = function () { renderModel(li); }
+
+                ul.appendChild(li);
+            });
+            div.appendChild(ul);
+        }
+
+        function getAllModels() {
+            fetch(apiModels)
+                .then(res => {
+                    if (res.status !== 200) {
+                        Debug.err(res);
+                        return;
+                    }
+
+                    if (debugMode)
+                        console.log(res);
+
+                    return res.json();
+                })
+                .then(models => {
+                    renderModelsNav(models);
+                })
+                .catch(err => { console.error(err); });
+        }
+
+        getAllModels();
+    </script>
+}

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Toyota.Data.Entities.Model>
+
+@{
+    ViewData["Title"] = "All Models";
+}
+
+<h1>Models</h1>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-3">
+            <div class="card">
+                <img class="card-img-top" style="margin: 16px;" src="@Html.DisplayFor(modelItem => item.ImgUrl)" />
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                    <a asp-action="ModelModifications" asp-route-id="@item.Id" class="btn btn-primary">Modifications</a>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="text-center" style="margin-top: 15px;">
+        <!-- Триггер/Открыть модальный -->
+        <button style="border-radius: 20px; margin: 0 auto;" class="btn btn-outline-info" onclick="document.getElementById('myModal-create-model').style.display = 'block';">Создать</button>
+    </div>
+
+    <!-- Модальный -->
+    <div id="myModal-create-model" class="modal">
+        <!-- Модальное содержание -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="document.getElementById('myModal-create-model').style.display = 'none';">&times;</span>
+                <h2>Создание модели</h2>
+            </div>
+            <form asp-action="CreateModel" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group input-group-sm">
+                        <label class="control-label">Slug</label>
+                        <input name="Slug" class="form-control" />
+
+                        <label class="control-label">Name</label>
+                        <input name="Name" class="form-control" />
+
+                        <label class="control-label">Image</label>
+                        <input name="file" type="file" class="form-control" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    /* Модальный (фон) */
+    .modal {
+        display: none; /* Скрыто по умолчанию */
+        position: fixed; /* Оставаться на месте */
+        z-index: 1; /* Сидеть на вершине */
+        left: 0;
+        top: 0;
+        width: 100%; /* Полная ширина */
+        height: 100%; /* Полная высота */
+        /*overflow: auto; Включите прокрутку, если это необходимо */
+        background-color: rgb(0,0,0); /* Цвет запасной вариант */
+        background-color: rgba(0,0,0,0.4); /* Черный с непрозрачностью */
+    }
+
+    /* Модальное содержание/коробка */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% сверху и по центру */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Может быть больше или меньше, в зависимости от размера экрана */
+    }
+
+    /* Кнопка закрытия */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
