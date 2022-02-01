@@ -56,9 +56,9 @@
                                     <h2 class="accordion-header" id=@h2Id>
                                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target=#@c2Id aria-expanded="true" aria-controls="@c2Id">
                                             <h5 class="card-title">
-                                                @*modificationColor.Color.Name  <== Color почему-то всегда null, хотя ColorId верный
-                                                <img src="@modificationColor.Color.ImgUrl" style="width: 20px; height: 20px;" />*@
-                                                Здесь должно быть название и картинка цвета, но в modificationColor.Color почему-то всегда null, хотя ColorId верный
+                                                @modificationColor.Color.Name  @*<== Color почему-то всегда null, хотя ColorId верный*@
+                                                <img src="@modificationColor.Color.ImgUrl" style="width: 20px; height: 20px;" />
+                                                @*Здесь должно быть название и картинка цвета, но в modificationColor.Color почему-то всегда null, хотя ColorId верный*@
                                             </h5>
                                         </button>
                                     </h2>
