@@ -92,5 +92,26 @@ namespace Toyota.Controllers.Admin
 
             return View(model);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateModificationColor([Bind("Id,Slug,ModificationId,ColorId")] ModificationColors modificationColors, IFormFile file)
+        {
+            if (ModelState.IsValid)
+            {
+                modificationColors.Id = Guid.NewGuid();
+                modificationColors.ImgUrl = await Helpers.Media.UploadImage(file, ModificationColorsDirectoryName);
+
+                _context.Add(modificationColors);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Name", modificationColors.ColorId);
+            ViewData["ModificationId"] = new SelectList(_context.Modifications, "Id", "Name", modificationColors.ModificationId);
+
+            return View(modificationColors);
+        }
     }
 }

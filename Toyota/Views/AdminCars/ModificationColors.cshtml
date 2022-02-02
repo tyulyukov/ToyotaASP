@@ -18,7 +18,7 @@
 
 <div>
     <!-- Триггер/Открыть модальный -->
-    <button style="border-radius: 20px; margin: 0 auto;" class="btn btn-outline-info">Create</button>
+    <button style="border-radius: 20px; margin: 0 auto;" class="btn btn-outline-info" onclick="document.getElementById('myModal-create-modification-color').style.display = 'block'">Create</button>
 </div>
 
 <div id="car" style="margin-top: 15px;">
@@ -26,14 +26,14 @@
 </div>
 
 <!-- Модальный -->
-<div id="myModal-create-model" class="modal">
+<div id="myModal-create-modification-color" class="modal">
     <!-- Модальное содержание -->
     <div class="modal-content">
         <div class="modal-header">
-            <span class="close" onclick="document.getElementById('myModal-create-model').style.display = 'none';">&times;</span>
+            <span class="close" onclick="document.getElementById('myModal-create-modification-color').style.display = 'none';">&times;</span>
             <h2>Создание модели</h2>
         </div>
-        <form asp-action="CreateModel" enctype="multipart/form-data">
+        <form asp-action="CreateModificationColor" enctype="multipart/form-data">
             <div class="modal-body">
                 <div class="form-group input-group-sm">
                     <label class="control-label">Slug</label>
