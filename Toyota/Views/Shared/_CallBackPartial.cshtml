@@ -29,7 +29,6 @@
     let callbackAlerts = document.getElementById("callbackAlerts");
 
     function isNullOrWhiteSpace(str) {
-        alertDanger('Заполните поля!');
         return str === null || str.match(/^ *$/) !== null;
     }
 
@@ -55,8 +54,10 @@
         let name = document.getElementById("callbackName").value;
         let phone = document.getElementById("callbackPhone").value;
 
-        if (isNullOrWhiteSpace(name) || isNullOrWhiteSpace(phone))
+        if (isNullOrWhiteSpace(name) || isNullOrWhiteSpace(phone)) {
+            alertDanger('Заполните поля!');
             return;
+        }
 
         let callback =
         {
