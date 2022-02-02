@@ -1,118 +1,62 @@
 ﻿@model IEnumerable<Toyota.Data.Entities.Modification>
 
 @{
-    ViewData["Title"] = "Modification for " + @ViewBag.OpenModel.Name;
-    String aId;
-    String a2Id;
-    String hId;
-    String h2Id;
-    String cId;
-    String c2Id;
+    ViewData["Title"] = "Modifications for " + @ViewBag.OpenModel.Name;
 }
 
 <a asp-action="Index">Back to List</a>
 
 <h1>Model: @ViewBag.OpenModel.Name</h1>
-<img src="@ViewBag.OpenModel.ImgUrl" style="height: 120px;" class="admin_model_thumb" />
 
 <div class="row">
-    @{
-        aId = "accordionModelModifications" + @ViewBag.OpenModel.Id;
-    }
-
-    <div class="accordion" id="@aId">
-
-        @foreach (var modification in Model)
-        {
-            {
-                hId = "heading" + @modification.Id;
-                cId = "collapse" + @modification.Id;
-            }
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id=@hId>
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target=#@cId aria-expanded="true" aria-controls="@cId">
-                        <h5 class="card-title">
-                            @modification.Name
-                        </h5>
-                    </button>
-                </h2>
-
-                <div id=@cId class="accordion-collapse collapse show" aria-labelledby="hId" data-bs-parent=#aId>
-                    <div class="accordion-body">
-                        @{
-                            a2Id = "accordionModificationColor" + modification.Id;
-                        }
-
-                        <div class="accordion" id="@aId">
-                            @foreach (var modificationColor in modification.ModificationColors)
-                            {
-                                {
-                                    h2Id = "heading" + modificationColor.Id;
-                                    c2Id = "collapse" + modificationColor.Id;
-                                }
-
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id=@h2Id>
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target=#@c2Id aria-expanded="true" aria-controls="@c2Id">
-                                            <h5 class="card-title">
-                                                @modificationColor.Color.Name  @*<== Color почему-то всегда null, хотя ColorId верный*@
-                                                <img src="@modificationColor.Color.ImgUrl" style="width: 20px; height: 20px;" />
-                                                @*Здесь должно быть название и картинка цвета, но в modificationColor.Color почему-то всегда null, хотя ColorId верный*@
-                                            </h5>
-                                        </button>
-                                    </h2>
-
-                                    <div id=@c2Id class="accordion-collapse collapse show" aria-labelledby="hId" data-bs-parent=#aId>
-                                        <div class="accordion-body">
-                                            <span>@modificationColor.Slug</span>
-                                            <img src="@modificationColor.ImgUrl" style="height: 90px;" />
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                    </div>
+    @foreach (var modification in Model)
+    {
+        <div class="col-3">
+            <div class="card" style="padding: 10px; margin-bottom: 30px;">
+                <img class="card-img-top" src="@modification.ImgUrl" />
+                <div class="card-body">
+                    <h5 class="card-title">@modification.Name</h5>
+                    <a asp-action="ModificationColors" asp-route-id="@modification.Id" class="btn btn-primary">Colors</a>
                 </div>
             </div>
-        }
-    </div>
-
-    <div class="text-center" style="margin-top: 15px;">
-        <!-- Триггер/Открыть модальный -->
-        <button style="border-radius: 20px; margin: 0 auto;" class="btn btn-outline-info" onclick="document.getElementById('myModal-create-modification').style.display = 'block';">Создать</button>
-    </div>
-
-    <!-- Модальный -->
-    <div id="myModal-create-modification" class="modal">
-        <!-- Модальное содержание -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="document.getElementById('myModal-create-modification').style.display = 'none';">&times;</span>
-                <h2>Создание модификации</h2>
-            </div>
-            <form asp-action="CreateModification" enctype="multipart/form-data">
-                <div class="modal-body">
-                    <input type="hidden" name="ModelId" value="@ViewBag.OpenModel.Id" />
-
-                    <div class="form-group input-group-sm">
-                        <label class="control-label">Slug</label>
-                        <input name="Slug" class="form-control" />
-
-                        <label class="control-label">Name</label>
-                        <input name="Name" class="form-control" />
-
-                        <label class="control-label">Image</label>
-                        <input name="file" type="file" class="form-control" />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-default" />
-                    </div>
-                </div>
-            </form>
         </div>
+    }
+</div>
+
+<div class="text-center" style="margin-top: 15px;">
+    <!-- Триггер/Открыть модальный -->
+    <button style="border-radius: 20px; margin: 0 auto;" class="btn btn-outline-info" onclick="document.getElementById('myModal-create-modification').style.display = 'block';">Создать</button>
+</div>
+
+<!-- Модальный -->
+<div id="myModal-create-modification" class="modal">
+    <!-- Модальное содержание -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" onclick="document.getElementById('myModal-create-modification').style.display = 'none';">&times;</span>
+            <h2>Создание модификации</h2>
+        </div>
+        <form asp-action="CreateModification" enctype="multipart/form-data">
+            <div class="modal-body">
+                <input type="hidden" name="ModelId" value="@ViewBag.OpenModel.Id" />
+
+                <div class="form-group input-group-sm">
+                    <label class="control-label">Slug</label>
+                    <input name="Slug" class="form-control" />
+
+                    <label class="control-label">Name</label>
+                    <input name="Name" class="form-control" />
+
+                    <label class="control-label">Image</label>
+                    <input name="file" type="file" class="form-control" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 

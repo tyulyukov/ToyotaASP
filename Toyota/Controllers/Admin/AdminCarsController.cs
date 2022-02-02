@@ -37,8 +37,21 @@ namespace Toyota.Controllers.Admin
             ViewBag.OpenModel = _context.Models.First(model => model.Id == id);
 
             return View(await _context.Modifications
-                        .Include(modification => modification.ModificationColors)
-                        .Where(mod => mod.ModelId == id).ToListAsync()
+                .Include(modification => modification.ModificationColors)
+                .Where(mod => mod.ModelId == id).ToListAsync()
+            );
+        }
+
+        public async Task<IActionResult> ModificationColors(Guid? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            ViewBag.OpenModification = _context.Modifications.First(modification => modification.Id == id);
+
+            return View(await _context.ModificationColors
+                .Include(modificationColor => modificationColor.Color)
+                .Where(modificationColor => modificationColor.ModificationId == id).ToListAsync()
             );
         }
 

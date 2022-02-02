@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Toyota.Data.Entities.ModificationColors>
+
+@{
+    String aId = "accordionModificationColor" + ViewBag.OpenModification.Id;
+}
+
+<a asp-action="ModelModifications" asp-route-id="@ViewBag.OpenModification.ModelId">Back</a>
+
+<h1>Modification: @ViewBag.OpenModification.Name</h1>
+
+@foreach (var modificationColor in Model)
+{
+    <h5 onclick="document.getElementById('car-image').src = '@modificationColor.ImgUrl'">
+        <img src="@modificationColor.Color.ImgUrl" alt="@modificationColor.Color.Name" style="border-radius:20px; width: 30px; height: 30px;" />
+        @modificationColor.Color.Name
+    </h5>
+}
+
+<div>
+    <!-- Триггер/Открыть модальный -->
+    <button style="border-radius: 20px; margin: 0 auto;" class="btn btn-outline-info">Create</button>
+</div>
+
+<div id="car" style="margin-top: 15px;">
+    <img id="car-image" src="@ViewBag.OpenModification.ImgUrl" class="d-block w-50">
+</div>
+
+<!-- Модальный -->
+<div id="myModal-create-model" class="modal">
+    <!-- Модальное содержание -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" onclick="document.getElementById('myModal-create-model').style.display = 'none';">&times;</span>
+            <h2>Создание модели</h2>
+        </div>
+        <form asp-action="CreateModel" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="form-group input-group-sm">
+                    <label class="control-label">Slug</label>
+                    <input name="Slug" class="form-control" />
+
+                    <label class="control-label">Name</label>
+                    <input name="Name" class="form-control" />
+
+                    <label class="control-label">Image</label>
+                    <input name="file" type="file" class="form-control" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

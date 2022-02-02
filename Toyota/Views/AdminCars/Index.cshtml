@@ -10,8 +10,8 @@
     @foreach (var item in Model)
     {
         <div class="col-3">
-            <div class="card">
-                <img class="card-img-top" style="margin: 16px;" src="@Html.DisplayFor(modelItem => item.ImgUrl)" />
+            <div class="card" style="padding: 10px; margin-bottom: 30px;">
+                <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.ImgUrl)" />
                 <div class="card-body">
                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
                     <a asp-action="ModelModifications" asp-route-id="@item.Id" class="btn btn-primary">Modifications</a>
@@ -56,7 +56,6 @@
     </div>
 </div>
 
-
 <style>
     /* Модальный (фон) */
     .modal {
@@ -89,10 +88,10 @@
         font-weight: bold;
     }
 
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
 </style>
