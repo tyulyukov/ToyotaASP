@@ -5,12 +5,12 @@ namespace Toyota.Helpers.Notification
 {
     public static class Telegram
     {
-        private static String token = "5017905308:AAEXrEZvxJ1aWjc_GYVhVrQXlolOa-pVsxk";
+        public static String Token = "";
         private static String chatId = "870452692";
 
         public static bool Send(String message)
         {
-            String url = $"https://api.telegram.org/bot{token}/sendMessage?chat_id={chatId}&text={message}";
+            String url = $"https://api.telegram.org/bot{Token}/sendMessage?chat_id={chatId}&text={message}";
             try
             {
                 var request = CreateRequest(url);
