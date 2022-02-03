@@ -12,34 +12,32 @@ namespace Toyota.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ApiModelsController : ControllerBase
+    public class GetColorsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public ApiModelsController(ApplicationDbContext context)
+        public GetColorsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/ApiModels
+        // GET: api/GetColors
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Model>>> GetModels()
+        public async Task<ActionResult<IEnumerable<Color>>> GetColors()
         {
-            return await _context.Models.ToListAsync();
+            return await _context.Colors.ToListAsync();
         }
 
-        // GET: api/ApiModels/5
+        // GET: api/GetColors/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Model>> GetModel(Guid id)
+        public async Task<ActionResult<Color>> GetColor(Guid id)
         {
-            var model = await _context.Models.FindAsync(id);
+            var color = await _context.Colors.FindAsync(id);
 
-            if (model == null)
-            {
+            if (color == null)
                 return NotFound();
-            }
 
-            return model;
+            return color;
         }
     }
 }

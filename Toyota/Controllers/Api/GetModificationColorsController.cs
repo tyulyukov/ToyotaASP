@@ -22,15 +22,22 @@ namespace Toyota.Controllers.Api
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<Color>>> Get(Guid id)
+        public async Task<ActionResult<IEnumerable<ModificationColors>>> Get(Guid id)
         {
-            return await _context.Colors
+            /*var colors = await _context.Colors
                     .SelectMany(
                         color => color.ModificationColors,
                         (c, mc) => new { Color = c, ModColor = mc })
                     .Where(a => a.ModColor.ModificationId == id)
-                    .Select(a => a.Color).ToListAsync();
+                    .Select(a => a.Color)
+                    .ToListAsync();*/
 
+            var modColors = await _context.ModificationColors
+                    .Where(modificationColor => modificationColor.ModificationId == id)
+                    //.Include(modificationColor => modificationColor.Color)
+                    .ToListAsync();
+            
+            return modColors;
         }
     }
 }

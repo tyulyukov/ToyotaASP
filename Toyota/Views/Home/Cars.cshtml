@@ -6,22 +6,124 @@
     <h1 class="display-4">Cars</h1>
 </div>
 
-<div id="navModels">
-    Тут будут ссылки на названия моделей
+<a class="link-primary" id="backToList" hidden>Back to list</a>
+<hr />
+
+<div class="row" id="navModels">
 </div>
 
-<div id="mainModels">
-    Тут будет активная модель
+<div class="row" id="placeholders">
+    <div class="col-3">
+        <div class="card" aria-hidden="true">
+            <div class="card-body">
+                <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                </h5>
+                <p class="card-text placeholder-glow">
+                    <span class="placeholder col-7"></span>
+                    <span class="placeholder col-4"></span>
+                    <span class="placeholder col-4"></span>
+                    <span class="placeholder col-6"></span>
+                    <span class="placeholder col-8"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="card" aria-hidden="true">
+            <div class="card-body">
+                <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                </h5>
+                <p class="card-text placeholder-glow">
+                    <span class="placeholder col-7"></span>
+                    <span class="placeholder col-4"></span>
+                    <span class="placeholder col-4"></span>
+                    <span class="placeholder col-6"></span>
+                    <span class="placeholder col-8"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="card" aria-hidden="true">
+            <div class="card-body">
+                <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                </h5>
+                <p class="card-text placeholder-glow">
+                    <span class="placeholder col-7"></span>
+                    <span class="placeholder col-4"></span>
+                    <span class="placeholder col-4"></span>
+                    <span class="placeholder col-6"></span>
+                    <span class="placeholder col-8"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="card" aria-hidden="true">
+            <div class="card-body">
+                <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                </h5>
+                <p class="card-text placeholder-glow">
+                    <span class="placeholder col-7"></span>
+                    <span class="placeholder col-4"></span>
+                    <span class="placeholder col-4"></span>
+                    <span class="placeholder col-6"></span>
+                    <span class="placeholder col-8"></span>
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
+
+@*@foreach (var modificationColor in Model)
+{
+    <h5 onclick="document.getElementById('car-image').src = '@modificationColor.ImgUrl'">
+        <img src="@modificationColor.Color.ImgUrl" alt="@modificationColor.Color.Name" style="border-radius:20px; width: 30px; height: 30px;" />
+        @modificationColor.Color.Name
+    </h5>
+}
+
+<div id="car" style="margin-top: 15px;">
+    <img id="car-image" src="@ViewBag.OpenModification.ImgUrl" class="d-block w-50">
+</div>*@
 
 @section Scripts {
     <script>
         let apiModels = "/api/ApiModels";
+        let apiModifications = "/api/GetModifications";
+        let apiModificationColors = "/api/GetModificationColors";
+        let apiColors = "/api/GetColors";
         let debugMode = false;
 
-        function renderModel(htmlTag) {
-            console.log(htmlTag);
-            fetch(apiModels + "/" + htmlTag.id)
+        let models;
+        let lastSelectedModelId;
+        let lastSelectedModificationId;
+
+        let openedModificationImgUrl;
+
+        let placeholders = document.getElementById("placeholders");
+
+        function renderModifications(modelId) {
+            if (debugMode)
+                console.log(modelId);
+
+            placeholders.hidden = false;
+            let div = document.getElementById("navModels");
+            div.innerHTML = "";
+
+            let backToList = document.getElementById("backToList");
+            backToList.hidden = false;
+            backToList.onclick = function () { backToModels(backToList); };
+
+            lastSelectedModelId = modelId;
+            fetch(apiModifications + "/" + modelId)
                 .then(res => {
                     if (res.status !== 200) {
                         console.error(res);
@@ -33,55 +135,61 @@
 
                     return res.json();
                 })
-                .then(model => {
+                .then(modifications => {
                     if (debugMode)
-                        console.log(model);
+                        console.log(modifications);
 
-                    let mainModels = document.getElementById("mainModels");
-                    let div = document.createElement("div");
+                    placeholders.hidden = true;
 
-                    let h3 = document.createElement("h3");
-                    h3.innerText = model.name;
+                    modifications.map(modification => {
+                        let column = document.createElement("div");
+                        column.className = "col-3";
 
-                    let img = document.createElement("img");
-                    img.src = model.imgUrl;
+                        let card = document.createElement("div");
+                        card.className = "card";
+                        card.style.padding = "10px";
+                        card.style.marginBottom = "30px";
 
-                    div.appendChild(h3);
-                    div.appendChild(img);
+                        card.id = modification.id;
+                        card.onclick = function () { openedModificationImgUrl = modification.imgUrl; renderModificationColors(modification.id); }
 
-                    mainModels.innerHTML = "";
-                    mainModels.appendChild(div);
+                        let img = document.createElement("img");
+                        img.src = modification.imgUrl;
+                        img.className = "card-img-top";
+
+                        let cardBody = document.createElement("div");
+                        cardBody.className = "card-body";
+
+                        let h5 = document.createElement("h5");
+                        h5.innerText = modification.name;
+
+                        cardBody.appendChild(h5);
+
+                        card.appendChild(img);
+                        card.appendChild(cardBody);
+
+                        column.appendChild(card);
+
+                        div.appendChild(column);
+                    });
                 })
                 .catch(err => { console.error(err); });
         }
 
-        function renderModelsNav(models) {
+        function renderModificationColors(modificationId) {
             if (debugMode)
-                console.log(models);
+                console.log(modificationId);
 
+            placeholders.hidden = false;
             let div = document.getElementById("navModels");
             div.innerHTML = "";
-            let ul = document.createElement("ul");
 
-            models.map(model => {
-                if (debugMode)
-                    console.log(model);
+            lastSelectedModificationId = modificationId;
 
-                let li = document.createElement("li");
-                li.innerText = model.name;
-                li.id = model.id;
-                li.onclick = function () { renderModel(li); }
-
-                ul.appendChild(li);
-            });
-            div.appendChild(ul);
-        }
-
-        function getAllModels() {
-            fetch(apiModels)
+            fetch(apiModificationColors + "/" + modificationId)
                 .then(res => {
                     if (res.status !== 200) {
-                        Debug.err(res);
+                        console.error(res);
                         return;
                     }
 
@@ -90,10 +198,148 @@
 
                     return res.json();
                 })
-                .then(models => {
-                    renderModelsNav(models);
+                .then(modificationColors => {
+                    if (debugMode)
+                        console.log(modificationColors);
+
+                    placeholders.hidden = true;
+
+                    let backToList = document.getElementById("backToList");
+                    backToList.hidden = false;
+                    backToList.onclick = function () { backToModifications(backToList) };
+
+                    let car = document.createElement("div");
+                    car.id = "car";
+                    car.style.marginTop = "15px";
+
+                    let carImg = document.createElement("img");
+                    carImg.id = "car-image";
+                    carImg.src = openedModificationImgUrl;
+                    carImg.className = "d-block w-50";
+
+                    car.appendChild(carImg);
+                    div.appendChild(car);
+
+                    let iter = 1;
+
+                    modificationColors.map(modificationColor => {
+                        fetch(apiColors + "/" + modificationColor.colorId)
+                            .then(res => res.json())
+                            .then(modColor => {
+                                if (debugMode) {
+                                    console.log(modificationColor);
+                                    console.log(modColor);
+                                }
+
+                                let formcheck = document.createElement("div");
+                                formcheck.className = "form-check";
+
+                                let input = document.createElement("input");
+                                input.className = "form-check-input";
+                                input.type = "radio";
+                                input.name = "flexRadioDefault";
+                                input.id = "flexRadioDefault" + iter;
+                                input.onclick = function () { document.getElementById('car-image').src = modificationColor.imgUrl; };
+
+                                let h5 = document.createElement("h5");
+                                h5.className = "form-check-label";
+                                h5.for = "flexRadioDefault" + iter;
+
+                                let img = document.createElement("img");
+                                img.src = modColor.imgUrl;
+                                img.style.borderRadius = "20px";
+                                img.style.width = "30px";
+                                img.style.height = "30px";
+
+                                h5.appendChild(img);
+                                h5.innerHTML += modColor.name;
+
+                                formcheck.appendChild(input);
+                                formcheck.appendChild(h5);
+
+                                div.appendChild(formcheck);
+
+                                iter++;
+                            })
+                            .catch(err => console.error(err));
+                    });
                 })
                 .catch(err => { console.error(err); });
+        }
+
+        function renderModelsNav(models) {
+            if (debugMode)
+                console.log(models);
+
+            placeholders.hidden = true;
+            let div = document.getElementById("navModels");
+            div.innerHTML = "";
+
+            models.map(model => {
+                if (debugMode)
+                    console.log(model);
+
+                let column = document.createElement("div");
+                column.className = "col-3";
+
+                let card = document.createElement("div");
+                card.className = "card";
+                card.style.padding = "10px";
+                card.style.marginBottom = "30px";
+
+                card.id = model.id;
+                card.onclick = function () { renderModifications(card.id); }
+
+                let img = document.createElement("img");
+                img.src = model.imgUrl;
+                img.className = "card-img-top";
+
+                let cardBody = document.createElement("div");
+                cardBody.className = "card-body";
+
+                let h5 = document.createElement("h5");
+                h5.innerText = model.name;
+
+                cardBody.appendChild(h5);
+
+                card.appendChild(img);
+                card.appendChild(cardBody);
+
+                column.appendChild(card);
+
+                div.appendChild(column);
+            });
+        }
+
+        function getAllModels() {
+            fetch(apiModels)
+                .then(res => {
+                    if (res.status !== 200) {
+                        console.error(res);
+                        return;
+                    }
+
+                    if (debugMode)
+                        console.log(res);
+
+                    return res.json();
+                })
+                .then(modelsCollection => {
+                    models = modelsCollection;
+                    renderModelsNav(modelsCollection);
+                })
+                .catch(err => { console.error(err); });
+        }
+
+        function backToModels(e) {
+            e.hidden = true;
+            renderModelsNav(models);
+        }
+
+        function backToModifications(e) {
+            e.hidden = false;
+            e.onclick = backToModels(e);
+            renderModifications(lastSelectedModelId);
         }
 
         getAllModels();
