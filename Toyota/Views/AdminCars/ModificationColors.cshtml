@@ -31,19 +31,12 @@
     <div class="modal-content">
         <div class="modal-header">
             <span class="close" onclick="document.getElementById('myModal-create-modification-color').style.display = 'none';">&times;</span>
-            <h2>Создание модели</h2>
+            <h2>Create Modification Color</h2>
         </div>
         <form asp-action="CreateModificationColor" enctype="multipart/form-data">
             <div class="modal-body">
                 <div class="form-group input-group-sm">
-                    <label class="control-label">Slug</label>
-                    <input name="Slug" class="form-control" />
 
-                    <label class="control-label">Name</label>
-                    <input name="Name" class="form-control" />
-
-                    <label class="control-label">Image</label>
-                    <input name="file" type="file" class="form-control" />
                 </div>
             </div>
             <div class="modal-footer">
@@ -54,3 +47,43 @@
         </form>
     </div>
 </div>
+
+<style>
+    /* Модальный (фон) */
+    .modal {
+        display: none; /* Скрыто по умолчанию */
+        position: fixed; /* Оставаться на месте */
+        z-index: 1; /* Сидеть на вершине */
+        left: 0;
+        top: 0;
+        width: 100%; /* Полная ширина */
+        height: 100%; /* Полная высота */
+        overflow: hidden;
+        background-color: rgb(0,0,0); /* Цвет запасной вариант */
+        background-color: rgba(0,0,0,0.4); /* Черный с непрозрачностью */
+    }
+
+    /* Модальное содержание/коробка */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% сверху и по центру */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Может быть больше или меньше, в зависимости от размера экрана */
+    }
+
+    /* Кнопка закрытия */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>

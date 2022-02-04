@@ -82,18 +82,6 @@
     </div>
 </div>
 
-@*@foreach (var modificationColor in Model)
-{
-    <h5 onclick="document.getElementById('car-image').src = '@modificationColor.ImgUrl'">
-        <img src="@modificationColor.Color.ImgUrl" alt="@modificationColor.Color.Name" style="border-radius:20px; width: 30px; height: 30px;" />
-        @modificationColor.Color.Name
-    </h5>
-}
-
-<div id="car" style="margin-top: 15px;">
-    <img id="car-image" src="@ViewBag.OpenModification.ImgUrl" class="d-block w-50">
-</div>*@
-
 @section Scripts {
     <script>
         let apiModels = "/api/ApiModels";
