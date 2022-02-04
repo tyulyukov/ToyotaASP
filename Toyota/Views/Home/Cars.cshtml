@@ -127,6 +127,9 @@
                     if (debugMode)
                         console.log(modifications);
 
+                    if (modifications == undefined)
+                        return;
+
                     placeholders.hidden = true;
 
                     modifications.map(modification => {
