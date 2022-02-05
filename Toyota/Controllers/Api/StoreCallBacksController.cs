@@ -24,7 +24,7 @@ namespace Toyota.Controllers.Api
             await _context.SaveChangesAsync();
 
             Helpers.Notification.Telegram.Send($"Заявка от {callBack.Name}\nНомер телефона: {callBack.Phone}\nID заявки: {callBack.Id}\n\nУ вас 30 секунд!");
-            Helpers.Notification.Email.Send($"Заявка от {callBack.Name}\nНомер телефона: {callBack.Phone}\nID заявки: {callBack.Id}", "Заявка на звонок", "makstyulyukov@gmail.com");
+            Helpers.Notification.Email.Send(callBack, "Заявка на звонок", "makstyulyukov@gmail.com");
 
             return CreatedAtAction("GetCallBack", new { id = callBack.Id }, callBack);
         }
