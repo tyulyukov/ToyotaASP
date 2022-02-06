@@ -26,6 +26,7 @@ namespace Toyota.Controllers.Admin
 
         public async Task<IActionResult> Index()
         {
+            ViewBag.Colors = await _context.Colors.ToListAsync();
             return View(await _context.Models.ToListAsync());
         }
 
@@ -48,6 +49,7 @@ namespace Toyota.Controllers.Admin
                 return NotFound();
 
             ViewBag.OpenModification = _context.Modifications.First(modification => modification.Id == id);
+            ViewBag.Colors = new SelectList(_context.Colors, "Id", "Name");
 
             return View(await _context.ModificationColors
                 .Include(modificationColor => modificationColor.Color)
@@ -105,13 +107,31 @@ namespace Toyota.Controllers.Admin
                 _context.Add(modificationColors);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ModificationColors), new { Id = modificationColors.ModificationId });
             }
 
             ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Name", modificationColors.ColorId);
             ViewData["ModificationId"] = new SelectList(_context.Modifications, "Id", "Name", modificationColors.ModificationId);
 
             return View(modificationColors);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateColor([Bind("Id,Name,Slug")] Color color, IFormFile file)
+        {
+            if (ModelState.IsValid)
+            {
+                color.Id = Guid.NewGuid();
+                color.ImgUrl = await Helpers.Media.UploadImage(file, ColorsDirectoryName);
+
+                _context.Add(color);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(color);
         }
     }
 }

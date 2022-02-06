@@ -35,8 +35,17 @@
         </div>
         <form asp-action="CreateModificationColor" enctype="multipart/form-data">
             <div class="modal-body">
-                <div class="form-group input-group-sm">
+                <input type="hidden" name="ModificationId" value="@ViewBag.OpenModification.Id" />
 
+                <div class="form-group input-group-sm">
+                    <label class="control-label">Slug</label>
+                    <input name="Slug" class="form-control" />
+
+                    <label class="control-label">Colors</label>
+                    <select name="ColorId" class="form-control" asp-items="@ViewBag.Colors"></select>
+
+                    <label class="control-label">Image</label>
+                    <input name="file" type="file" class="form-control" />
                 </div>
             </div>
             <div class="modal-footer">

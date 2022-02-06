@@ -22,7 +22,7 @@
 
     <div class="text-center" style="margin-top: 15px;">
         <!-- Триггер/Открыть модальный -->
-        <button style="border-radius: 20px; margin: 0 auto;" class="btn btn-outline-info" onclick="document.getElementById('myModal-create-model').style.display = 'block';">Создать</button>
+        <button style="border-radius: 20px; margin: 0 auto;" class="btn btn-outline-info" onclick="document.getElementById('myModal-create-model').style.display = 'block';">Create</button>
     </div>
 
     <!-- Модальный -->
@@ -31,9 +31,60 @@
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close" onclick="document.getElementById('myModal-create-model').style.display = 'none';">&times;</span>
-                <h2>Создание модели</h2>
+                <h2>Create model</h2>
             </div>
             <form asp-action="CreateModel" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group input-group-sm">
+                        <label class="control-label">Slug</label>
+                        <input name="Slug" class="form-control" />
+
+                        <label class="control-label">Name</label>
+                        <input name="Name" class="form-control" />
+
+                        <label class="control-label">Image</label>
+                        <input name="file" type="file" class="form-control" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<h1>Colors</h1>
+
+<div class="row">
+    @foreach (var color in ViewBag.Colors)
+    {
+        <div class="col-2 text-center">
+            <div class="card" style="padding: 10px; margin-bottom: 30px;">
+                <img style="border-radius: 50px;" class="card-img-top" src="@color.ImgUrl" />
+                <div class="card-body">
+                    <h5 class="card-title">@color.Name</h5>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="text-center" style="margin-top: 15px;">
+        <!-- Триггер/Открыть модальный -->
+        <button style="border-radius: 20px; margin: 0 auto;" class="btn btn-outline-info" onclick="document.getElementById('myModal-create-color').style.display = 'block';">Create</button>
+    </div>
+
+    <!-- Модальный -->
+    <div id="myModal-create-color" class="modal">
+        <!-- Модальное содержание -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="document.getElementById('myModal-create-color').style.display = 'none';">&times;</span>
+                <h2>Create color</h2>
+            </div>
+            <form asp-action="CreateColor" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group input-group-sm">
                         <label class="control-label">Slug</label>
