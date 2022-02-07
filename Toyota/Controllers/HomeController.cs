@@ -32,6 +32,9 @@ namespace Toyota.Controllers
             // var dumpModificationColors = new DumpModificationColors(_context);
             // var modificationColor = dumpModificationColors.Restore(dumpModificationColors.Create());
 
+            // var dumpDatabase = new DumpDatabase(_context);
+            // var db = dumpDatabase.Restore(dumpDatabase.Create());
+
             return View();
         }
 
