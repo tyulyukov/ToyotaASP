@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<ArrayOfColor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Color>
+    <Id>d363a28c-8ca5-4f75-8ce6-1b5c32c028db</Id>
+    <Name>Midnight blue</Name>
+    <Slug>midnight-blue</Slug>
+    <ImgUrl>/storage/colors_thumbs/2022/2/9eb32eb2-9eb7-430a-b759-d67e21bd1ee3.jpg</ImgUrl>
+  </Color>
+  <Color>
+    <Id>69144925-0284-4652-969a-3d4e9a16cc17</Id>
+    <Name>Red pearl</Name>
+    <Slug>red-pearl</Slug>
+    <ImgUrl>/storage/colors_thumbs/2022/2/7a02c66d-1b0d-4d29-bf5f-13efb18dd98a.jpg</ImgUrl>
+  </Color>
+  <Color>
+    <Id>c3ae8648-dec6-4b5a-a838-7664389164b7</Id>
+    <Name>White</Name>
+    <Slug>white</Slug>
+    <ImgUrl>/storage/colors_thumbs/2022/1/64b6227a-461d-4150-b03d-03e8b1b12287.jpg</ImgUrl>
+  </Color>
+  <Color>
+    <Id>8673df76-ee16-45dd-b497-b2f2af3b2cba</Id>
+    <Name>Black metallic</Name>
+    <Slug>black-metallic</Slug>
+    <ImgUrl>/storage/colors_thumbs/2022/1/a2a972ab-fb77-40b5-860b-71ab41e1481a.jpg</ImgUrl>
+  </Color>
+  <Color>
+    <Id>337a2b47-a3c4-4387-8620-e1170cd600d1</Id>
+    <Name>Gray metallic</Name>
+    <Slug>gray-metallic</Slug>
+    <ImgUrl>/storage/colors_thumbs/2022/2/2e55b0d6-3db5-48ae-8ba4-8d66285d59c8.jpg</ImgUrl>
+  </Color>
+</ArrayOfColor>

@@ -10,6 +10,8 @@ namespace Toyota.Data.Entities
         public Guid Id { get; set; }
         public String Name { get; set; }
         public String Phone { get; set; }
+        [NotMapped]
+        public String Email { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }

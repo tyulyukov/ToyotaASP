@@ -7,6 +7,9 @@
 
         <label class="control-label">Phone</label>
         <input id="callbackPhone" name="Phone" class="form-control" />
+
+        <label class="control-label">Email</label>
+        <input id="callbackEmail" name="Phone" class="form-control" />
     </div>
     <div class="form-group" style="margin-top: 5px;">
         <button id="callbackSend" class="btn btn-primary" tabindex="0" data-bs-toggle="popover" data-bs-trigger="focus" title="Dismissible popover" data-bs-content="And here's some amazing content. It's very engaging. Right?">
@@ -53,6 +56,7 @@
     buttonSend.onclick = function () {
         let name = document.getElementById("callbackName").value;
         let phone = document.getElementById("callbackPhone").value;
+        let email = document.getElementById("callbackEmail").value;
 
         if (isNullOrWhiteSpace(name) || isNullOrWhiteSpace(phone)) {
             alertDanger('Заполните поля!');
@@ -65,7 +69,8 @@
         let callback =
         {
             Name: name,
-            Phone: phone
+            Phone: phone,
+            Email: email
         }
 
         let prevInnerHTML = buttonSend.innerHTML;

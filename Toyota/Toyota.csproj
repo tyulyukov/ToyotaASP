@@ -19,8 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\storage\" />
+    <Folder Include="Helpers\Database\Seeds\" />
     <Folder Include="wwwroot\storage\colors_thumbs\2022\1\" />
+    <Folder Include="wwwroot\storage\dumps\" />
   </ItemGroup>
 
 </Project>

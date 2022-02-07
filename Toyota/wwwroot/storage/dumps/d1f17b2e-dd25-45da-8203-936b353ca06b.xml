@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ArrayOfModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Model>
+    <Id>ad262871-4060-46e7-aeaa-577d821652e7</Id>
+    <Name>Corolla</Name>
+    <Slug>toyota-corolla</Slug>
+    <ImgUrl>/storage/models_thumbs/2022/1/fc3788f9-7cd2-46f8-afce-dca261416443.png</ImgUrl>
+  </Model>
+  <Model>
+    <Id>00666148-be63-43ea-807a-ba98224a2ecc</Id>
+    <Name>Land Cruiser</Name>
+    <Slug>toyota-land-cruiser</Slug>
+    <ImgUrl>/storage/models_thumbs/2022/2/c418b4ac-8b2e-4926-b28e-87e2b1f5c55c.png</ImgUrl>
+  </Model>
+</ArrayOfModel>

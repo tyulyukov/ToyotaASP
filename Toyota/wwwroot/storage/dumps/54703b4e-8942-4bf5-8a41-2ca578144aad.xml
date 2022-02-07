@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<ArrayOfModification xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Modification>
+    <Id>b355987f-df39-4274-8c5a-0d43582c1906</Id>
+    <Name>Corolla Active</Name>
+    <Slug>toyota-corolla-active</Slug>
+    <ImgUrl>/storage/modifications_thumbs/2022/2/47364939-f0fa-4963-8cc3-39f4e6873c03.png</ImgUrl>
+    <ModelId>ad262871-4060-46e7-aeaa-577d821652e7</ModelId>
+  </Modification>
+  <Modification>
+    <Id>51e87db5-fc7e-4531-be65-57183ac84da9</Id>
+    <Name>Corolla Live</Name>
+    <Slug>toyota-corolla-live</Slug>
+    <ImgUrl>/storage/modifications_thumbs/2022/1/63fc5f6c-e31b-4f68-b7e2-51e572c7e187.png</ImgUrl>
+    <ModelId>ad262871-4060-46e7-aeaa-577d821652e7</ModelId>
+  </Modification>
+  <Modification>
+    <Id>e4c01acc-5f82-4208-b038-691ac46812f1</Id>
+    <Name>Corolla Style</Name>
+    <Slug>toyota-corolla-style</Slug>
+    <ImgUrl>/storage/modifications_thumbs/2022/1/82fd3d88-5af2-46db-85ed-c69ec129f8b2.png</ImgUrl>
+    <ModelId>ad262871-4060-46e7-aeaa-577d821652e7</ModelId>
+  </Modification>
+  <Modification>
+    <Id>0e23a1c5-6bf3-46d2-8c4d-81deef5c2190</Id>
+    <Name>Corolla GR SPORT</Name>
+    <Slug>toyota-corolla-gr-sport</Slug>
+    <ImgUrl>/storage/modifications_thumbs/2022/1/8452c015-eeb3-4528-bb9a-c9ee2ea161f7.png</ImgUrl>
+    <ModelId>ad262871-4060-46e7-aeaa-577d821652e7</ModelId>
+  </Modification>
+  <Modification>
+    <Id>9ba9e07b-5860-49bf-8bbd-b7de856f0395</Id>
+    <Name>Corolla City</Name>
+    <Slug>toyota-corolla-city</Slug>
+    <ImgUrl>/storage/modifications_thumbs/2022/1/f5b3c79c-d84d-4f8f-95cc-81b63d2f0eb4.png</ImgUrl>
+    <ModelId>ad262871-4060-46e7-aeaa-577d821652e7</ModelId>
+  </Modification>
+  <Modification>
+    <Id>8c012bca-a619-4ba8-ab77-eafc7d0a6e95</Id>
+    <Name>Land Cruiser Prestige</Name>
+    <Slug>toyota-land-cruiser-prestige</Slug>
+    <ImgUrl>/storage/modifications_thumbs/2022/2/1e6a37ce-fb39-48f8-9201-6b414e8fcde9.png</ImgUrl>
+    <ModelId>00666148-be63-43ea-807a-ba98224a2ecc</ModelId>
+  </Modification>
+</ArrayOfModification>
