@@ -64,7 +64,7 @@ namespace Toyota
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=AdminFile}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

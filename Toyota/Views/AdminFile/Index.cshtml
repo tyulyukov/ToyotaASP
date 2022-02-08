@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "File Manager";
+}
+
+<div id="directoriesContainer">
+    <ul>
+        @foreach (var directory in ViewBag.Directories)
+        {
+            <li id="@directory" onclick="onDirectoryClick(this)">@directory</li>
+        }
+    </ul>
+
+    <ul>
+        @foreach (var file in ViewBag.DirectoryFiles)
+        {
+            <li id="@file">@file</li>
+        }
+    </ul>
+</div>
+
+<script>
+    let directoriesContainer = document.getElementById("directoriesContainer");
+
+    function onDirectoryClick(e) {
+        getDirectories(e.id);
+    }
+
+    function getDirectories(directory) {
+        fetch("api/GetAdminFiles/" + directory)
+            .then(res => res.json())
+            .then(directories => {
+                console.log(directories);
+                renderDirectories(directories);
+            })
+            .catch(err => console.error(err))
+    }
+
+    function renderDirectories(directories) {
+        directoriesContainer.innerHTML = "";
+
+        directories.map(directory => {
+            let 
+        });
+    }
+</script>

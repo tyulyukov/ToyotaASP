@@ -16,7 +16,7 @@ namespace Toyota.Helpers.Database.Dump
         {
             XmlSerializer formatter = new(typeof(List<Color>));
 
-            String fileName = Guid.NewGuid() + ".xml";
+            String fileName = $"{DateTime.Now.ToString("yyyyMMddHHmmssffff")}backupColors.xml";
 
             using (FileStream fs = new FileStream(Path + fileName, FileMode.OpenOrCreate))
                 formatter.Serialize(fs, context.Colors.ToList());

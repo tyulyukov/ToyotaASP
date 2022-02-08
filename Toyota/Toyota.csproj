@@ -21,6 +21,7 @@
   <ItemGroup>
     <Folder Include="Helpers\Database\Seeds\" />
     <Folder Include="wwwroot\storage\colors_thumbs\2022\1\" />
+    <Folder Include="wwwroot\storage\colors_thumbs\2021\" />
     <Folder Include="wwwroot\storage\dumps\" />
   </ItemGroup>
 
