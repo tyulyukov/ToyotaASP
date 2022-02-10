@@ -53,7 +53,7 @@ namespace Toyota.Controllers.Auth
         private ClaimsIdentity GetIdentity(string username, string password)
         {
             User identity = null;
-            var users = _context.Users.Where(user => user.UserName == username);
+            var users = _context.Users;
 
             foreach (var user in users)
             {
