@@ -2,44 +2,190 @@
     ViewData["Title"] = "File Manager";
 }
 
-<div id="directoriesContainer">
-    <ul>
-        @foreach (var directory in ViewBag.Directories)
-        {
-            <li id="@directory" onclick="onDirectoryClick(this)">@directory</li>
-        }
-    </ul>
+<div class="text-center">
+    <h1 class="display-4">Files</h1>
+</div>
 
-    <ul>
-        @foreach (var file in ViewBag.DirectoryFiles)
-        {
-            <li id="@file">@file</li>
-        }
-    </ul>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Root</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Storage</li>
+    </ol>
+</nav>
+
+<div id="directoriesContainer" class="row">
+
 </div>
 
 <script>
     let directoriesContainer = document.getElementById("directoriesContainer");
+    let backToList = document.getElementById("backToList");
 
     function onDirectoryClick(e) {
         getDirectories(e.id);
     }
 
     function getDirectories(directory) {
-        fetch("api/GetAdminFiles/" + directory)
+        let requestDirectory = directory.replaceAll('/', '~');
+        requestDirectory = directory.replaceAll('\\', '~');
+        console.log(requestDirectory);
+
+        fetch("api/GetAdminDirectories/" + requestDirectory)
             .then(res => res.json())
             .then(directories => {
                 console.log(directories);
-                renderDirectories(directories);
+
+                directoriesContainer.innerHTML = "";
+
+                if (directories != null && directories.length != 0)
+                    renderDirectories(directories, directory);
+
+                getFiles(directory);
             })
             .catch(err => console.error(err))
     }
 
-    function renderDirectories(directories) {
-        directoriesContainer.innerHTML = "";
-
+    function renderDirectories(directories, directoryName) {
         directories.map(directory => {
-            let 
+            let card = createFolderCard(directory.replaceAll(directoryName, ''));
+            card.id = directory;
+            card.onclick = () => onDirectoryClick(card);
+
+            directoriesContainer.appendChild(card);
         });
     }
+
+    function getFiles(directory) {
+        let requestDirectory = directory.replaceAll('/', '~');
+        requestDirectory = directory.replaceAll('\\', '~');
+        console.log(requestDirectory);
+
+        fetch("api/GetAdminFiles/" + requestDirectory)
+            .then(res => res.json())
+            .then(files => {
+                console.log(files);
+
+                if (files != null && files.length != 0)
+                    renderFiles(files, directory);
+            })
+            .catch(err => console.error(err))
+    }
+
+    function renderFiles(files, directoryName) {
+        files.map(file => {
+            let card = createFileCard(file.replaceAll(directoryName, ''), '0 B');
+            card.id = file;
+
+            directoriesContainer.appendChild(card);
+        });
+    }
+
+    function createFolderCard(folderName) {
+        let folderCard = document.createElement("div");
+        folderCard.className = "col-lg-3 col-xl-2";
+
+        folderCard.innerHTML =
+            '<div class="file-man-box"><a class="file-close"><img style="width: 20px" src="https://img.icons8.com/ios-filled/50/000000/cancel.png"/></a>' +
+            '    <div class="file-img-box">' +
+            '        <img src="https://img.icons8.com/ios-filled/50/000000/downloads-folder--v2.png" />' +
+            '    </div>' +
+            '    <div class="file-man-title">' +
+            '        <h5 class="mb-0">' + folderName + '</h5>' +
+            '    </div>' +
+            '</div>';
+
+        return folderCard;
+    }
+
+    function createFileCard(fileName, fileSize) {
+        let fileCard = document.createElement("div");
+        fileCard.className = "col-lg-3 col-xl-2";
+
+        fileCard.innerHTML =
+            '<div class="file-man-box"><a class="file-close"><img style="width: 20px" src="https://img.icons8.com/ios-filled/50/000000/cancel.png"/></a>' +
+            '    <div class="file-img-box">' +
+            '        <img src="https://img.icons8.com/ios-glyphs/50/000000/file--v1.png"/>' +
+            '    </div>' +
+            '    <div class="file-man-title">' +
+            '        <h5 class="mb-0">' + fileName + '</h5>' +
+            '        <p class="mb-0"><small>' + fileSize + '</small></p>' +
+            '    </div>' +
+            '</div>';
+
+        return fileCard;
+    }
+
+    getDirectories('');
 </script>
+
+<style>
+    .card-box {
+        padding: 20px;
+        border-radius: 3px;
+        margin-bottom: 30px;
+        background-color: #fff;
+    }
+
+    .file-man-box {
+        padding: 20px;
+        border: 1px solid #e3eaef;
+        border-radius: 5px;
+        position: relative;
+        margin-bottom: 20px
+    }
+
+    .file-man-box .file-close {
+        color: #f1556c;
+        position: absolute;
+        line-height: 24px;
+        font-size: 24px;
+        right: 10px;
+        top: 10px;
+        visibility: hidden
+    }
+
+    .file-man-box .file-img-box {
+        line-height: 120px;
+        text-align: center
+    }
+
+    .file-man-box .file-img-box img {
+        height: 64px
+    }
+
+    .file-man-box .file-download {
+        font-size: 32px;
+        color: #98a6ad;
+        position: absolute;
+        right: 10px
+    }
+
+    .file-man-box .file-download:hover {
+        color: #313a46
+    }
+
+    .file-man-box .file-man-title {
+        padding-right: 25px
+    }
+
+    .file-man-box:hover {
+        -webkit-box-shadow: 0 0 24px 0 rgba(0, 0, 0, .06), 0 1px 0 0 rgba(0, 0, 0, .02);
+        box-shadow: 0 0 24px 0 rgba(0, 0, 0, .06), 0 1px 0 0 rgba(0, 0, 0, .02)
+    }
+
+    .file-man-box:hover .file-close {
+        visibility: visible
+    }
+
+    .text-overflow {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: block;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    h5 {
+        font-size: 15px;
+    }
+</style>

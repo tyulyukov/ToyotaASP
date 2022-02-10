@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Toyota.Helpers
 {
     public class Root
     {
-        public IReadOnlyList<DirectoryInfo> Directories => directories;
-        private List<DirectoryInfo> directories;
-
+        public IReadOnlyList<DirectoryInformation> Directories => directories;
         public IReadOnlyList<FileInformation> Files => files;
+
+        private List<DirectoryInformation> directories;
         private List<FileInformation> files;
 
         public Root()
@@ -22,43 +20,57 @@ namespace Toyota.Helpers
         public void ConfigureRoot()
         {
             var currentDirs = Directory.GetDirectories(Media.StoragePath);
-            directories = new List<DirectoryInfo>();
+            directories = new List<DirectoryInformation>();
 
             foreach (var directory in currentDirs)
-            {
-                directories.Add(new DirectoryInfo(directory, Media.StoragePath + "\\" + directory, Directory.GetFiles(Media.StoragePath + "\\" + directory)));
-            }
+                directories.Add(new DirectoryInformation(directory, Media.StoragePath + "\\" + directory));
 
             var currentFiles = Directory.GetFiles(Media.StoragePath);
             files = new List<FileInformation>();
 
             foreach (var file in currentFiles)
-            {
-                files.
-            }
+                files.Add(new FileInformation(file, Media.StoragePath + "\\" + file));
         }
     }
 
-    public class DirectoryInfo
+    [Serializable]
+    public class DirectoryInformation
     {
         public readonly Guid Id;
         public readonly String Name;
         public readonly String Path;
-        public readonly List<FileInformation> Files;
+        public IReadOnlyList<FileInformation> Files => files;
+        public IReadOnlyList<DirectoryInformation> Directories => directories;
 
-        public DirectoryInfo(String directoryName, String path, String[] files)
+        private List<FileInformation> files;
+        private List<DirectoryInformation> directories;
+
+        public DirectoryInformation(String directoryName, String path)
         {
             Id = Guid.NewGuid();
             Name = directoryName;
             Path = path;
 
-            Files = new List<FileInformation>();
+            Refresh();
+        }
 
-            foreach (var file in files)
-                Files.Add(new FileInformation(file, path + "\\" + file));
+        public void Refresh()
+        {
+            var currentDirectories = Directory.GetDirectories(Path);
+            directories = new List<DirectoryInformation>();
+
+            foreach (var directory in currentDirectories)
+                directories.Add(new DirectoryInformation(directory, Path + "\\" + directory));
+
+            var currentFiles = Directory.GetFiles(Path);
+            files = new List<FileInformation>();
+
+            foreach (var file in currentFiles)
+                files.Add(new FileInformation(file, Path + "\\" + file));
         }
     }
 
+    [Serializable]
     public class FileInformation
     {
         public readonly Guid Id;
@@ -67,6 +79,7 @@ namespace Toyota.Helpers
 
         public FileInformation(String name, String path)
         {
+            Id = Guid.NewGuid();
             Name = name;
             Path = path;
         }

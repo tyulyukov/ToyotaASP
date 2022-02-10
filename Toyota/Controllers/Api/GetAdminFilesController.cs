@@ -19,12 +19,23 @@ namespace Toyota.Controllers.Api
             if (String.IsNullOrWhiteSpace(path))
                 return null;
 
-            var directories = Directory.GetDirectories(Media.StoragePath + "\\" + path);
+            var files = Directory.GetFiles(Media.StoragePath + "\\" + path.Replace("~", "\\"));
 
-            for (int i = 0; i < directories.Length; i++)
-                directories[i] = directories[i].Replace(Media.StoragePath, "");
+            for (int i = 0; i < files.Length; i++)
+                files[i] = files[i].Replace(Media.StoragePath + "\\", "");
 
-            return directories;
+            return files;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<String[]>> Get()
+        {
+            var files = Directory.GetFiles(Media.StoragePath);
+
+            for (int i = 0; i < files.Length; i++)
+                files[i] = files[i].Replace(Media.StoragePath, "");
+
+            return files;
         }
     }
 }
