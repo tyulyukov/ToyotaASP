@@ -8,9 +8,8 @@
 </div>
 
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Root</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Storage</li>
+    <ol id="breadcrumb" class="breadcrumb">
+        <li class="breadcrumb-item">storage</li>
     </ol>
 </nav>
 
@@ -36,6 +35,7 @@
             .then(directories => {
                 console.log(directories);
 
+                renderBreadcrumb(requestDirectory);
                 directoriesContainer.innerHTML = "";
 
                 if (directories != null && directories.length != 0)
@@ -114,6 +114,25 @@
             '</div>';
 
         return fileCard;
+    }
+
+    function renderBreadcrumb(path) {
+        let placeholder = document.getElementById("breadcrumb");
+
+        placeholder.innerHTML = '<li class="breadcrumb-item">storage</li>';
+
+        let dirs = path.split('~');
+
+        dirs.map(d => {
+            let li = document.createElement("li");
+            li.className = "breadcrumb-item";
+            li.innerText = d;
+
+            placeholder.lastChild.className += " active";
+            placeholder.lastChild.innerHTML = "<a href='#'>" + placeholder.lastChild.innerText + "</a>";
+
+            placeholder.appendChild(li);
+        });
     }
 
     getDirectories('');
