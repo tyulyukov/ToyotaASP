@@ -2,6 +2,7 @@
 
 @{
     String aId = "accordionModificationColor" + ViewBag.OpenModification.Id;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <a asp-action="ModelModifications" asp-route-id="@ViewBag.OpenModification.ModelId">Back</a>
