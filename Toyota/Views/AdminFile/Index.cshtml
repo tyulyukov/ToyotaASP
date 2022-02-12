@@ -26,8 +26,9 @@
     }
 
     function getDirectories(directory) {
+        console.log(directory);
         let requestDirectory = directory.replaceAll('/', '~');
-        requestDirectory = directory.replaceAll('\\', '~');
+        requestDirectory = requestDirectory.replaceAll('\\', '~');
         console.log(requestDirectory);
 
         fetch("api/GetAdminDirectories/" + requestDirectory)
@@ -48,7 +49,7 @@
 
     function renderDirectories(directories, directoryName) {
         directories.map(directory => {
-            let card = createFolderCard(directory.replaceAll(directoryName, ''));
+            let card = createFolderCard(directory.substring(directoryName.length));
             card.id = directory;
             card.onclick = () => onDirectoryClick(card);
 
@@ -58,7 +59,7 @@
 
     function getFiles(directory) {
         let requestDirectory = directory.replaceAll('/', '~');
-        requestDirectory = directory.replaceAll('\\', '~');
+        requestDirectory = requestDirectory.replaceAll('\\', '~');
         console.log(requestDirectory);
 
         fetch("api/GetAdminFiles/" + requestDirectory)
@@ -74,7 +75,7 @@
 
     function renderFiles(files, directoryName) {
         files.map(file => {
-            let card = createFileCard(file.replaceAll(directoryName, ''), '0 B');
+            let card = createFileCard(file.substring(directoryName.length), '0 B');
             card.id = file;
 
             directoriesContainer.appendChild(card);
@@ -122,15 +123,21 @@
         placeholder.innerHTML = '<li class="breadcrumb-item">storage</li>';
 
         let dirs = path.split('~');
+        let currentPath = "";
 
-        dirs.map(d => {
+        dirs.map(dir => {
             let li = document.createElement("li");
             li.className = "breadcrumb-item";
-            li.innerText = d;
-
+            li.innerText = dir;
+            
             placeholder.lastChild.className += " active";
-            placeholder.lastChild.innerHTML = "<a href='#'>" + placeholder.lastChild.innerText + "</a>";
+            placeholder.lastChild.innerHTML = `<a onclick="getDirectories('` + currentPath + `')" href="#">` + placeholder.lastChild.innerText + `</a>`;
+            
+            if (currentPath != "")
+                currentPath += '/';
 
+            currentPath += dir;
+            
             placeholder.appendChild(li);
         });
     }

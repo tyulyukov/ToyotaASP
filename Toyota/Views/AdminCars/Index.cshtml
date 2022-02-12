@@ -15,6 +15,7 @@
                 <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.ImgUrl)" />
                 <div class="card-body">
                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                    <br />
                     <a asp-action="ModelModifications" asp-route-id="@item.Id" class="btn btn-primary">Modifications</a>
                 </div>
             </div>
