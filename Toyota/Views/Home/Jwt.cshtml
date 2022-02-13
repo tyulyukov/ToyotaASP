@@ -14,19 +14,12 @@
     <input type="password" id="passwordLogin" /><br /><br />
     <input type="submit" id="submitLogin" value="Логин" />
 </div>
-<div>
-    <input type="submit" id="getDataByLogin" value="Данные по логину" />
-</div>
-<div>
-    <input type="submit" id="getDataByRole" value="Данные по роли" />
-</div>
 
 <script>
     var tokenKey = "accessToken";
 
     // отпавка запроса к контроллеру AccountController для получения токена
     async function getTokenAsync() {
-
         // получаем данные формы и фомируем объект для отправки
         const formData = new FormData();
         formData.append("grant_type", "password");
@@ -35,10 +28,10 @@
 
         // отправляет запрос и получаем ответ
         const response = await fetch("/token", {
-        method: "POST",
-                headers: {"Accept": "application/json"},
-                body: formData
-            });
+            method: "POST",
+            headers: {"Accept": "application/json"},
+            body: formData
+        });
         // получаем данные
         const data = await response.json();
 
@@ -59,55 +52,18 @@
         }
     };
 
-    // отправка запроса к контроллеру ValuesController
-    async function getData(url) {
-        const token = sessionStorage.getItem(tokenKey);
-
-        const response = await fetch(url, {
-        method: "GET",
-                headers: {
-                "Accept": "application/json",
-                    "Authorization": "Bearer " + token  // передача токена в заголовке
-                }
-        });
-        if (response.ok === true) {
-
-            const data = await response.json();
-            alert(data)
-            }
-        else
-            console.log("Status: ", response.status);
-    };
-
     // получаем токен
     document.getElementById("submitLogin").addEventListener("click", e => {
-
         e.preventDefault();
         getTokenAsync();
     });
 
     // условный выход - просто удаляем токен и меняем видимость блоков
     document.getElementById("logOut").addEventListener("click", e => {
-
-    e.preventDefault();
-    document.getElementById("userName").innerText = "";
-    document.getElementById("userInfo").style.display = "none";
-    document.getElementById("loginForm").style.display = "block";
-    sessionStorage.removeItem(tokenKey);
-    });
-
-
-    // кнопка получения имя пользователя  - /api/values/getlogin
-    document.getElementById("getDataByLogin").addEventListener("click", e => {
-
-    e.preventDefault();
-    getData("/api/values/getlogin");
-    });
-
-    // кнопка получения роли  - /api/values/getrole
-    document.getElementById("getDataByRole").addEventListener("click", e => {
-
-    e.preventDefault();
-    getData("/api/values/getrole");
+        e.preventDefault();
+        document.getElementById("userName").innerText = "";
+        document.getElementById("userInfo").style.display = "none";
+        document.getElementById("loginForm").style.display = "block";
+        sessionStorage.removeItem(tokenKey);
     });
 </script>
