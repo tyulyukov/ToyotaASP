@@ -28,10 +28,8 @@ namespace Toyota.Controllers.Api
             List<String> dumps = new();
 
             foreach (var file in files)
-            {
                 if (file.EndsWith(".json"))
                     dumps.Add(file.Replace(Dump.Path, ""));
-            }
 
             return dumps;
         }

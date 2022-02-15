@@ -19,7 +19,7 @@
                     <div class="card-body">
                         <h5 class="card-title">JSON backup</h5>
                         <p class="card-text">
-                            <button class="btn btn-primary">Create</button>
+                            <button id="createButton" class="btn btn-primary">Create</button>
                         </p>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                                 </select>
                             </div>
 
-                            <button class="btn btn-primary">Restore</button>
+                            <button id="restoreButton" class="btn btn-primary">Restore</button>
                         </p>
                     </div>
                 </div>
@@ -89,16 +89,41 @@
         fetch("api/getBackups")
             .then(res => res.json())
             .then(backups => {
-                backupsSelect.innerHTML = '';
-
-                for (var backup of backups) {
-                    let option = document.createElement("option");
-                    option.text = backup;
-
-                    backupsSelect.appendChild(option);
-                }
+                renderBackups(backups);
             })
             .catch(err => console.error(err))
+    }
+
+    function renderBackups(backups) {
+        backupsSelect.innerHTML = '';
+
+        for (var backup of backups) {
+            let option = document.createElement("option");
+            option.text = backup;
+
+            backupsSelect.appendChild(option);
+        }
+    }
+
+    document.getElementById("createButton").onclick = () => {
+        fetch("api/StoreBackups")
+            .then(res => res.json())
+            .then(backup => {
+                console.log(backup);
+
+                let option = document.createElement("option");
+                option.text = backup;
+
+                backupsSelect.appendChild(option);
+            })
+            .catch(err => console.error(err));
+    };
+
+    document.getElementById("restoreButton").onclick = () => {
+        fetch("api/StoreBackup/" + backupsSelect.options[backupsSelect.selectedIndex].text)
+            .then(res => res.json())
+            .then(backup => console.log(backup))
+            .catch(err => console.error(err));
     }
 
     getBackups();

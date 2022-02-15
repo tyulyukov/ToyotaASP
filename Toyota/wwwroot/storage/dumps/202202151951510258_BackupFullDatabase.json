@@ -1,0 +1,200 @@
+{
+  "$id": "1",
+  "$values": [
+    {
+      "$id": "2",
+      "Id": "d24fe777-5029-4fdb-bf6a-617713e34396",
+      "Name": "Corolla GR SPORT",
+      "Slug": "toyota-corolla-gr-sport",
+      "ImgUrl": "/storage/modifications_thumbs/2022/2/57c8f6a7-14ee-4616-8a73-28e9771e4351.png",
+      "Model": {
+        "$id": "3",
+        "Id": "cc768456-685c-4a46-a64a-e1e8b192589e",
+        "Name": "Corolla",
+        "Slug": "toyota-corolla",
+        "ImgUrl": "/storage/models_thumbs/2022/2/3a3bed56-b14f-466f-9688-a305df3f4415.png",
+        "Modifications": {
+          "$id": "4",
+          "$values": [
+            {
+              "$ref": "2"
+            },
+            {
+              "$id": "5",
+              "Id": "40487272-a6d2-4e59-9aa7-df0467a4f6ba",
+              "Name": "Corolla City",
+              "Slug": "toyota-corolla-city",
+              "ImgUrl": "/storage/modifications_thumbs/2022/2/bef9a8e7-96ab-4505-9cd2-277590f8eb3c.png",
+              "Model": {
+                "$ref": "3"
+              },
+              "ModelId": "cc768456-685c-4a46-a64a-e1e8b192589e",
+              "ModificationColors": {
+                "$id": "6",
+                "$values": [
+                  {
+                    "$id": "7",
+                    "Id": "f063150c-5b48-406f-9031-4ecadaac086c",
+                    "Slug": "toyota-corolla-city-black",
+                    "Modification": {
+                      "$ref": "5"
+                    },
+                    "ModificationId": "40487272-a6d2-4e59-9aa7-df0467a4f6ba",
+                    "Color": {
+                      "$id": "8",
+                      "Id": "1cc3954c-04dd-4f9e-b3c1-64d1584ca3ee",
+                      "Name": "Black",
+                      "Slug": "black-metallic",
+                      "ImgUrl": "/storage/colors_thumbs/2022/2/53b538e8-4dee-4c46-9715-d7803e80e16d.jpg",
+                      "ModificationColors": {
+                        "$id": "9",
+                        "$values": [
+                          {
+                            "$id": "10",
+                            "Id": "a9fe2910-cf77-4096-8325-daef0a5e295f",
+                            "Slug": "toyota-corolla-gr-sport-black",
+                            "Modification": {
+                              "$ref": "2"
+                            },
+                            "ModificationId": "d24fe777-5029-4fdb-bf6a-617713e34396",
+                            "Color": {
+                              "$ref": "8"
+                            },
+                            "ColorId": "1cc3954c-04dd-4f9e-b3c1-64d1584ca3ee",
+                            "ImgUrl": "/storage/modification_colors_thumbs/2022/2/ec18b972-9bb4-4790-99ad-a083dbda3e44.png"
+                          },
+                          {
+                            "$id": "11",
+                            "Id": "14646ffa-c014-47e7-8aea-770d2c3529be",
+                            "Slug": "toyota-land-cruiser-prestige-black",
+                            "Modification": {
+                              "$id": "12",
+                              "Id": "6bbc8a2a-2c24-43a3-a6fc-c0a95ee8569d",
+                              "Name": "Land Cruiser Prestige",
+                              "Slug": "toyota-land-cruiser-prestige",
+                              "ImgUrl": "/storage/modifications_thumbs/2022/2/7d8c28dc-af65-47ee-ba04-d965042747b9.png",
+                              "Model": {
+                                "$id": "13",
+                                "Id": "6fc25d82-2d55-4002-8d53-e9f190a4b42f",
+                                "Name": "Land Cruiser",
+                                "Slug": "toyota-land-cruiser",
+                                "ImgUrl": "/storage/models_thumbs/2022/2/bbd3a959-9577-45e1-8bc8-28454e325cad.png",
+                                "Modifications": {
+                                  "$id": "14",
+                                  "$values": [
+                                    {
+                                      "$ref": "12"
+                                    }
+                                  ]
+                                }
+                              },
+                              "ModelId": "6fc25d82-2d55-4002-8d53-e9f190a4b42f",
+                              "ModificationColors": {
+                                "$id": "15",
+                                "$values": [
+                                  {
+                                    "$ref": "11"
+                                  },
+                                  {
+                                    "$id": "16",
+                                    "Id": "44743e24-0195-482c-91ed-d4603806af7c",
+                                    "Slug": "toyota-land-cruiser-prestige-white",
+                                    "Modification": {
+                                      "$ref": "12"
+                                    },
+                                    "ModificationId": "6bbc8a2a-2c24-43a3-a6fc-c0a95ee8569d",
+                                    "Color": {
+                                      "$id": "17",
+                                      "Id": "0aea585d-8eb9-4d55-9c93-9dbc5e779bcb",
+                                      "Name": "White",
+                                      "Slug": "white",
+                                      "ImgUrl": "/storage/colors_thumbs/2022/2/28b37438-3419-40bc-a686-3e8e890ea793.jpg",
+                                      "ModificationColors": {
+                                        "$id": "18",
+                                        "$values": [
+                                          {
+                                            "$id": "19",
+                                            "Id": "d8e309fa-e7e8-428a-93c8-22728e81d7a1",
+                                            "Slug": "toyota-corolla-gr-sport-white",
+                                            "Modification": {
+                                              "$ref": "2"
+                                            },
+                                            "ModificationId": "d24fe777-5029-4fdb-bf6a-617713e34396",
+                                            "Color": {
+                                              "$ref": "17"
+                                            },
+                                            "ColorId": "0aea585d-8eb9-4d55-9c93-9dbc5e779bcb",
+                                            "ImgUrl": "/storage/modification_colors_thumbs/2022/2/7602d546-7eb6-4207-935c-f54f08998219.png"
+                                          },
+                                          {
+                                            "$ref": "16"
+                                          },
+                                          {
+                                            "$id": "20",
+                                            "Id": "bdcbc23b-a244-4220-bf00-b198252a7848",
+                                            "Slug": "toyota-corolla-city-white",
+                                            "Modification": {
+                                              "$ref": "5"
+                                            },
+                                            "ModificationId": "40487272-a6d2-4e59-9aa7-df0467a4f6ba",
+                                            "Color": {
+                                              "$ref": "17"
+                                            },
+                                            "ColorId": "0aea585d-8eb9-4d55-9c93-9dbc5e779bcb",
+                                            "ImgUrl": "/storage/modification_colors_thumbs/2022/2/3d3288dd-dca2-4eb6-af40-aa70c66fb53d.png"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "ColorId": "0aea585d-8eb9-4d55-9c93-9dbc5e779bcb",
+                                    "ImgUrl": "/storage/modification_colors_thumbs/2022/2/5a808aaf-ba7f-41f8-badc-aee545aeb551.png"
+                                  }
+                                ]
+                              }
+                            },
+                            "ModificationId": "6bbc8a2a-2c24-43a3-a6fc-c0a95ee8569d",
+                            "Color": {
+                              "$ref": "8"
+                            },
+                            "ColorId": "1cc3954c-04dd-4f9e-b3c1-64d1584ca3ee",
+                            "ImgUrl": "/storage/modification_colors_thumbs/2022/2/75ea06fb-246e-4403-822d-e6b77ec2d5c0.png"
+                          },
+                          {
+                            "$ref": "7"
+                          }
+                        ]
+                      }
+                    },
+                    "ColorId": "1cc3954c-04dd-4f9e-b3c1-64d1584ca3ee",
+                    "ImgUrl": "/storage/modification_colors_thumbs/2022/2/92ff53a0-ae2a-4c2f-a8fb-dd89695f3e0d.png"
+                  },
+                  {
+                    "$ref": "20"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "ModelId": "cc768456-685c-4a46-a64a-e1e8b192589e",
+      "ModificationColors": {
+        "$id": "21",
+        "$values": [
+          {
+            "$ref": "19"
+          },
+          {
+            "$ref": "10"
+          }
+        ]
+      }
+    },
+    {
+      "$ref": "12"
+    },
+    {
+      "$ref": "5"
+    }
+  ]
+}
