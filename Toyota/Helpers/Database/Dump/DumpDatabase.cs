@@ -17,7 +17,7 @@ namespace Toyota.Helpers.Database.Dump
 
         public override String Create()
         {
-            String fileName = $"{DateTime.Now.ToString("yyyyMMddHHmmssffff")}_BackupFullDatabase.json";
+            String fileName = $"{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ffff")}-BackupFullDatabase.json";
 
             var db = context.Modifications
                      .Include(m => m.Model)

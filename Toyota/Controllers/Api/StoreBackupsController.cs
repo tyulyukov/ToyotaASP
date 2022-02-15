@@ -29,7 +29,7 @@ namespace Toyota.Controllers.Api
             String backupPath = dumpDatabase.Create();
             backupPath = backupPath.Replace(Dump.Path, "");
 
-            return backupPath;
+            return new JsonResult(backupPath);
         }
 
         [HttpGet("{backupName}")]
@@ -38,7 +38,7 @@ namespace Toyota.Controllers.Api
             if (!dumpDatabase.Restore(Dump.Path + backupName))
                 return BadRequest();
 
-            return CreatedAtAction("RestoreBackup", backupName);
+            return new JsonResult(backupName);
         }
     }
 }
