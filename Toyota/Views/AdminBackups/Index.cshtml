@@ -1,0 +1,105 @@
+﻿@{
+    ViewData["Title"] = "Backups";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-header text-center">
+    <div class="container">
+        <div class="row mb-2">
+            <h1 class="m-0">Backups</h1>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="card card-primary card-outline">
+                    <div class="card-body">
+                        <h5 class="card-title">JSON backup</h5>
+                        <p class="card-text">
+                            <button class="btn btn-primary">Create</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card card-primary card-outline">
+                    <div class="card-body">
+                        <h5 class="card-title">Database</h5>
+                        <p class="card-text">
+                            <div class="form-group">
+                                <label>Backups</label>
+                                <select id="backups" class="form-control">
+                                    <option>Backups loading...</option>
+                                </select>
+                            </div>
+
+                            <button class="btn btn-primary">Restore</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card card-primary card-outline">
+                    <div class="card-body">
+                        <h5 class="card-title">Backup logs</h5>
+                        <p class="card-text">
+                            <div class="timeline">
+
+                                <div>
+                                    <i class="fas fa-copy bg-blue"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fas fa-clock"></i> 2 mins ago</span>
+                                        <h3 class="timeline-header no-border">Database restored from backup</h3>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <i class="fas fa-copy bg-blue"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
+                                        <h3 class="timeline-header no-border">Backup created</h3>
+                                    </div>
+                                </div>
+
+                                <div class="time-label">
+                                    <span class="bg-red">15 Feb. 2022</span>
+                                </div>
+
+                                <div>
+                                    <i class="fas fa-clock bg-gray"></i>
+                                </div>
+                            </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let backupsSelect = document.getElementById("backups");
+
+    function getBackups() {
+        fetch("api/getBackups")
+            .then(res => res.json())
+            .then(backups => {
+                backupsSelect.innerHTML = '';
+
+                for (var backup of backups) {
+                    let option = document.createElement("option");
+                    option.text = backup;
+
+                    backupsSelect.appendChild(option);
+                }
+            })
+            .catch(err => console.error(err))
+    }
+
+    getBackups();
+</script>

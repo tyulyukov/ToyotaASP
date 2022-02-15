@@ -5,7 +5,7 @@ namespace Toyota.Helpers.Database.Dump
 {
     public abstract class Dump
     {
-        public readonly String Path = Media.WebRootPath + "\\storage\\dumps\\";
+        public static readonly String Path = Media.WebRootPath + "\\storage\\dumps\\";
         protected ApplicationDbContext context;
 
         public Dump(ApplicationDbContext _context)
@@ -14,6 +14,6 @@ namespace Toyota.Helpers.Database.Dump
         }
 
         public abstract String Create();
-        public abstract object Restore(String filePath);
+        public abstract bool Restore(String filePath);
     }
 }

@@ -28,12 +28,15 @@ namespace Toyota.Helpers.Database.Dump
             return Path + fileName;
         }
 
-        public override List<Color> Restore(string filePath)
+        public override bool Restore(string filePath)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Color>));
-            
+            List<Color> backup; 
+
             using (Stream reader = new FileStream(filePath, FileMode.Open))
-                return (List<Color>)serializer.Deserialize(reader);
+                backup = (List<Color>)serializer.Deserialize(reader);
+
+            return true;
         }
     }
 }
